@@ -6,6 +6,7 @@ __pycache__/
 .ruff_cache/
 .coverage
 *.backup
+/docs/demo.md
 frontend/node_modules/
 frontend/dist/
 frontend/test-results/

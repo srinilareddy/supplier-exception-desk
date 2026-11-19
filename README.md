@@ -18,7 +18,7 @@ docker compose exec -T api python -m desk.seed
 
 Open [the desk](http://127.0.0.1:8765) and sign in as `buyer@example.test`. The sample environment sets the password to `local-demo-only`. It also provisions `supervisor@example.test` as an operator and `viewer@example.test` as a read-only account, using the same local demo password.
 
-The initial queue derives from 12 synthetic order lines and eight carrier shipment snapshots. Start with `PO-48109`, a critical short shipment. For intake, upload `fixtures/orders-mixed.csv` to see a valid insert, an unchanged replay, a source conflict, and field errors in one batch. See [the five-minute walkthrough](docs/demo.md).
+The initial queue derives from 12 synthetic order lines and eight carrier shipment snapshots. Start with `PO-48109`, a critical short shipment. For intake, upload `fixtures/orders-mixed.csv` to see a valid insert, an unchanged replay, a source conflict, and field errors in one batch.
 
 ## Engineering decisions
 
