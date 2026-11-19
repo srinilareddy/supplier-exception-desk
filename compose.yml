@@ -1,0 +1,56 @@
+name: supplier-exception-desk
+
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?copy .env.example to .env}
+      POSTGRES_USER: ${POSTGRES_USER:?copy .env.example to .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?copy .env.example to .env}
+    ports:
+      - "127.0.0.1:${DESK_DB_PORT:-55432}:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 2s
+      retries: 20
+      timeout: 3s
+
+  carrier:
+    image: supplier-exception-desk-local:dev
+    pull_policy: never
+    command: ["uvicorn", "desk.carrier_service:app", "--host", "0.0.0.0", "--port", "8091"]
+    ports:
+      - "127.0.0.1:${DESK_CARRIER_PORT:-8766}:8091"
+    healthcheck:
+      test: ["CMD", "python", "-c", "from urllib.request import urlopen; urlopen('http://127.0.0.1:8091/health', timeout=3)"]
+      interval: 3s
+      retries: 15
+      timeout: 4s
+
+  api:
+    build: .
+    image: supplier-exception-desk-local:dev
+    depends_on:
+      db:
+        condition: service_healthy
+      carrier:
+        condition: service_started
+    environment:
+      DESK_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      DESK_CARRIER_URL: http://carrier:8091
+      DESK_COOKIE_SECURE: ${DESK_COOKIE_SECURE:-true}
+      DESK_AS_OF_DATE: ${DESK_AS_OF_DATE:-}
+      DESK_DEMO_PASSWORD: ${DESK_DEMO_PASSWORD:-}
+    command: ["/bin/sh", "-c", "alembic upgrade head && exec uvicorn desk.main:app --host 0.0.0.0 --port 8080 --no-access-log"]
+    ports:
+      - "127.0.0.1:${DESK_APP_PORT:-8765}:8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "from urllib.request import urlopen; urlopen('http://127.0.0.1:8080/api/health/ready', timeout=3)"]
+      interval: 5s
+      retries: 20
+      timeout: 4s
+
+volumes:
+  database:

@@ -1,0 +1,13 @@
+order_number,line_number,supplier,sku,description,quantity,promise_date
+PO-48109,1,Northline Components,DRV-240,Conveyor drive belt,120,2026-11-09
+PO-48112,1,Apex Industrial,BRG-108,Sealed conveyor bearing,200,2026-11-10
+PO-48118,1,Ridgeway Plastics,TRAY-20,Assembly line tote,150,2026-11-14
+PO-48121,1,Harbor Fasteners,BOLT-16,Flanged structural bolt,80,2026-11-15
+PO-48125,1,Northline Components,SNS-04,Proximity sensor,48,2026-11-17
+PO-48127,1,Apex Industrial,GSK-24,Pump housing gasket,240,2026-11-18
+PO-48130,1,Ridgeway Plastics,CAP-40,Thread protector,300,2026-11-20
+PO-48131,1,Harbor Fasteners,NUT-16,Locknut pack,240,2026-11-13
+PO-48132,1,Northline Components,FLT-80,Intake filter media,500,2026-11-16
+PO-48134,1,Apex Industrial,PLT-42,Mounting plate,80,2026-11-19
+PO-48134,2,Apex Industrial,CLP-10,Cable retention clip,60,2026-11-17
+PO-48140,1,Harbor Fasteners,WSH-18,Load washer,360,2026-11-22

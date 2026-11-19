@@ -1,0 +1,6 @@
+order_number,line_number,supplier,sku,description,quantity,promise_date
+PO-48145,1,Ridgeway Plastics,GUIDE-12,Guard rail guide,100,2026-11-16
+PO-48109,1,Northline Components,DRV-240,Conveyor drive belt,120,2026-11-09
+PO-48109,1,Northline Components,DRV-240,Conveyor drive belt,140,2026-11-09
+PO-48146,1,Harbor Fasteners,KIT-17,Mounting kit,-4,2026-11-17
+PO-48147,1,Apex Industrial,COUP-3,Shaft coupling,40,11/15/26
